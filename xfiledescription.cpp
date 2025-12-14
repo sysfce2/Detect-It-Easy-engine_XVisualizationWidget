@@ -22,9 +22,9 @@
 
 XFileDescription::XFileDescription(QGraphicsScene *pScene, const QColor color, const QString &sText)
 {
-    g_pScene = pScene;
-    g_color = color;
-    g_sText = sText;
+    m_pScene = pScene;
+    m_color = color;
+    m_sText = sText;
 
     QFont _font = pScene->font();
     setFont(_font);
@@ -38,7 +38,7 @@ QRectF XFileDescription::boundingRect() const
     QRectF result;
 
     QFont _font = font();
-    QSize _size = QFontMetrics(_font).size(Qt::TextSingleLine, g_sText);
+    QSize _size = QFontMetrics(_font).size(Qt::TextSingleLine, m_sText);
 
     qint32 nHeight = _size.height();
     qint32 nWidth = nHeight * 2 + _size.width();
@@ -60,7 +60,7 @@ void XFileDescription::paint(QPainter *pPainter, const QStyleOptionGraphicsItem 
 {
     Q_UNUSED(pWidget)
 
-    QColor fillColor = (pOption->state & QStyle::State_Selected) ? g_color.darker(150) : g_color;
+    QColor fillColor = (pOption->state & QStyle::State_Selected) ? m_color.darker(150) : m_color;
     if (pOption->state & QStyle::State_MouseOver) {
         fillColor = fillColor.lighter(125);
     }
@@ -71,7 +71,7 @@ void XFileDescription::paint(QPainter *pPainter, const QStyleOptionGraphicsItem 
     QRectF rectText = QRectF(rect.left() + rect.height() * 2, rect.top(), rect.width() - rect.height() * 2, rect.height());
 
     pPainter->fillRect(rectColor, fillColor);
-    pPainter->drawText(rectText, g_sText);
+    pPainter->drawText(rectText, m_sText);
 }
 
 void XFileDescription::mousePressEvent(QGraphicsSceneMouseEvent *event)

@@ -43,9 +43,9 @@ protected:
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
 
 private:
-    QGraphicsScene *g_pScene;
-    QColor g_color;
-    QString g_sText;
+    QGraphicsScene *m_pScene;
+    QColor m_color;
+    QString m_sText;
 };
 
 #endif  // XFILEDESCRIPTION_H
