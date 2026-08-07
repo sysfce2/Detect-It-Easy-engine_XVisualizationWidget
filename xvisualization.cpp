@@ -49,9 +49,13 @@ QImage XVisualization::createImage(DATA *pData)
             XAREA areaRegion = isRegionPresent(pData, nIndex);
             XAREA areaHighlight = isHighlightPresent(pData, nIndex);
 
-            qint32 nValue = 0;
+            qint32 nValue = 100;
 
-            nValue = pData->listParts.at(nIndex).nValue[pData->dataMethod];
+            // listParts can be shorter than nWidth*nHeight if a reload was cancelled mid-scan;
+            // an ungated re-render (method/region change) must not index past the end.
+            if (nIndex < pData->listParts.count()) {
+                nValue = pData->listParts.at(nIndex).nValue[pData->dataMethod];
+            }
 
             QColor colorBlock;
 
