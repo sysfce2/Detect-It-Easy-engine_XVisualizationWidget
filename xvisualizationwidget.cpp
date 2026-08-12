@@ -25,6 +25,9 @@ XVisualizationWidget::XVisualizationWidget(QWidget *pParent) : XShortcutsWidget(
 {
     ui->setupUi(this);
 
+    m_inData = {};
+    g_data = {};
+
     XOptions::adjustToolButton(ui->toolButtonVisualizationReload, XOptions::ICONTYPE_RELOAD);
     XOptions::adjustToolButton(ui->toolButtonVisualizationSave, XOptions::ICONTYPE_SAVE);
 
@@ -109,7 +112,16 @@ void XVisualizationWidget::setData(QIODevice *pDevice, XBinary::FT fileType, boo
 
 void XVisualizationWidget::clear()
 {
+    ui->widgetImage->clear();
+    ui->listWidgetRegions->clear();
+    ui->listWidgetHighlights->clear();
+    ui->comboBoxMethod->clear();
+    if (g_pScene) {
+        g_pScene->clear();
+    }
+
     m_inData = {};
+    g_data = {};
 }
 
 void XVisualizationWidget::reload()
